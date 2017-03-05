@@ -5,7 +5,7 @@
 
 void left_encoder_pin_config (void);
 void right_encoder_pin_config (void);
-void posencoder_init();
+void posencoder_init(); 
 void left_position_encoder_interrupt_init (void) ;
 void right_position_encoder_interrupt_init (void);
 ISR(INT5_vect);

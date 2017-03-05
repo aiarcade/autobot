@@ -15,7 +15,7 @@ COMMON = -mmcu=$(MCU)
 
 ## Compile options common for all C compilation units.
 CFLAGS = $(COMMON)
-CFLAGS += -Wall -gdwarf-2 -std=gnu99   -DF_CPU=14745600UL -Os -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
+CFLAGS += -Wall -gdwarf-2 -std=gnu99      -DUART_RX2_BUFFER_SIZE=128  -DUART_TX2_BUFFER_SIZE=128  -DUSART2_ENABLED       -DF_CPU=14745600UL -Os -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 CFLAGS += -MD -MP -MT $(*F).o -MF dep/$(@F).d 
 
 ## Assembly specific flags
@@ -25,7 +25,7 @@ ASMFLAGS += -x assembler-with-cpp -Wa,-gdwarf2
 
 ## Linker flags
 LDFLAGS = $(COMMON)
-LDFLAGS +=  -Wl,-Map=autobot.map
+LDFLAGS += -Wl,-u,vfprintf -Wl,-Map=autobot.map
 
 
 ## Intel Hex file production flags
@@ -36,8 +36,11 @@ HEX_EEPROM_FLAGS += --set-section-flags=.eeprom="alloc,load"
 HEX_EEPROM_FLAGS += --change-section-lma .eeprom=0 --no-change-warnings
 
 
+## Libraries
+LIBS = -lprintf_flt -lm -lc 
+
 ## Objects that must be built in order to link
-OBJECTS = autobot.o lcd.o adc.o motor.o posencoder.o 
+OBJECTS = autobot.o lcd.o adc.o motor.o posencoder.o uart.o particlefilter.o 
 
 ## Objects explicitly added by the user
 LINKONLYOBJECTS = 
@@ -59,6 +62,12 @@ motor.o: ../motor.c
 	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
 
 posencoder.o: ../posencoder.c
+	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
+
+uart.o: ../uart.c
+	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
+
+particlefilter.o: ../particlefilter.c
 	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
 
 ##Link
