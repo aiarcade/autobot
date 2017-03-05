@@ -73,7 +73,7 @@ unsigned int sense_obstacles(){
 void sense_objects()
 {
 	
-	unsigned int ob1,ob2,ob3;
+	
 	left();
 	_delay_ms(150);
 	range_points[0]=sense_obstacles();
@@ -194,14 +194,18 @@ int main(void)
 	while(1)
 	{
 	
-		sense_objects();
-		odo_points[0]= getPosLeftCount();
-		odo_points[1]= getPosRightCount();
-		
-		send_data_over_serial();
+	
 		char * cin=get_data();
 		int duration=command_data(cin);
 		exec_motion_cmd(cin[0],duration);
+
+
+		odo_points[0]= getPosLeftCount();
+		odo_points[1]= getPosRightCount();
+		sense_objects();
+		
+		
+		send_data_over_serial();
 		//lcd_home();
 		//lcd_string(cin);
 		//lcd_print(2,2,command_data(cin),5);

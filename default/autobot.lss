@@ -13,19 +13,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   4 .debug_pubnames 00000638  00000000  00000000  00002cbe  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00001862  00000000  00000000  000032f6  2**0
+  5 .debug_info   00001841  00000000  00000000  000032f6  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 00000800  00000000  00000000  00004b58  2**0
+  6 .debug_abbrev 000007f3  00000000  00000000  00004b37  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   0000132b  00000000  00000000  00005358  2**0
+  7 .debug_line   0000132b  00000000  00000000  0000532a  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000440  00000000  00000000  00006684  2**2
+  8 .debug_frame  00000440  00000000  00000000  00006658  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    000005f8  00000000  00000000  00006ac4  2**0
+  9 .debug_str    000005f8  00000000  00000000  00006a98  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    000009ca  00000000  00000000  000070bc  2**0
+ 10 .debug_loc    000009ca  00000000  00000000  00007090  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000060  00000000  00000000  00007a86  2**0
+ 11 .debug_ranges 00000060  00000000  00000000  00007a5a  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -724,7 +724,7 @@ unsigned int sense_obstacles(){
 void sense_objects()
 {
 	
-	unsigned int ob1,ob2,ob3;
+	
 	left();
      512:	0e 94 2f 05 	call	0xa5e	; 0xa5e <left>
      516:	8c ed       	ldi	r24, 0xDC	; 220
@@ -986,34 +986,37 @@ int main(void)
      67c:	0e 94 cd 04 	call	0x99a	; 0x99a <adc_init>
 	 uart2_init();
      680:	0e 94 ec 05 	call	0xbd8	; 0xbd8 <uart2_init>
-
 	
 	while(1)
 	{
 	
-		sense_objects();
-     684:	0e 94 89 02 	call	0x512	; 0x512 <sense_objects>
+	
+		char * cin=get_data();
+     684:	0e 94 48 06 	call	0xc90	; 0xc90 <get_data>
+     688:	8c 01       	movw	r16, r24
+		int duration=command_data(cin);
+     68a:	0e 94 c4 01 	call	0x388	; 0x388 <command_data>
+     68e:	bc 01       	movw	r22, r24
+		exec_motion_cmd(cin[0],duration);
+     690:	f8 01       	movw	r30, r16
+     692:	80 81       	ld	r24, Z
+     694:	0e 94 58 01 	call	0x2b0	; 0x2b0 <exec_motion_cmd>
+
+
 		odo_points[0]= getPosLeftCount();
-     688:	0e 94 c8 05 	call	0xb90	; 0xb90 <getPosLeftCount>
-     68c:	70 93 3b 02 	sts	0x023B, r23
-     690:	60 93 3a 02 	sts	0x023A, r22
+     698:	0e 94 c8 05 	call	0xb90	; 0xb90 <getPosLeftCount>
+     69c:	70 93 3b 02 	sts	0x023B, r23
+     6a0:	60 93 3a 02 	sts	0x023A, r22
 		odo_points[1]= getPosRightCount();
-     694:	0e 94 d1 05 	call	0xba2	; 0xba2 <getPosRightCount>
-     698:	70 93 3d 02 	sts	0x023D, r23
-     69c:	60 93 3c 02 	sts	0x023C, r22
+     6a4:	0e 94 d1 05 	call	0xba2	; 0xba2 <getPosRightCount>
+     6a8:	70 93 3d 02 	sts	0x023D, r23
+     6ac:	60 93 3c 02 	sts	0x023C, r22
+		sense_objects();
+     6b0:	0e 94 89 02 	call	0x512	; 0x512 <sense_objects>
+		
 		
 		send_data_over_serial();
-     6a0:	0e 94 cc 02 	call	0x598	; 0x598 <send_data_over_serial>
-		char * cin=get_data();
-     6a4:	0e 94 48 06 	call	0xc90	; 0xc90 <get_data>
-     6a8:	8c 01       	movw	r16, r24
-		int duration=command_data(cin);
-     6aa:	0e 94 c4 01 	call	0x388	; 0x388 <command_data>
-     6ae:	bc 01       	movw	r22, r24
-		exec_motion_cmd(cin[0],duration);
-     6b0:	f8 01       	movw	r30, r16
-     6b2:	80 81       	ld	r24, Z
-     6b4:	0e 94 58 01 	call	0x2b0	; 0x2b0 <exec_motion_cmd>
+     6b4:	0e 94 cc 02 	call	0x598	; 0x598 <send_data_over_serial>
      6b8:	e5 cf       	rjmp	.-54     	; 0x684 <main+0x18>
 
 000006ba <lcd_port_config>:

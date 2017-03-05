@@ -868,26 +868,26 @@ LOAD c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr6\libgcc.a
  .debug_pubnames
                 0x00000528      0x110 particlefilter.o
 
-.debug_info     0x00000000     0x1862
+.debug_info     0x00000000     0x1841
  *(.debug_info)
- .debug_info    0x00000000      0x6af autobot.o
- .debug_info    0x000006af      0x580 lcd.o
- .debug_info    0x00000c2f      0x188 adc.o
- .debug_info    0x00000db7      0x2ef motor.o
- .debug_info    0x000010a6      0x1be posencoder.o
- .debug_info    0x00001264      0x17f uart.o
- .debug_info    0x000013e3      0x47f particlefilter.o
+ .debug_info    0x00000000      0x68e autobot.o
+ .debug_info    0x0000068e      0x580 lcd.o
+ .debug_info    0x00000c0e      0x188 adc.o
+ .debug_info    0x00000d96      0x2ef motor.o
+ .debug_info    0x00001085      0x1be posencoder.o
+ .debug_info    0x00001243      0x17f uart.o
+ .debug_info    0x000013c2      0x47f particlefilter.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev   0x00000000      0x800
+.debug_abbrev   0x00000000      0x7f3
  *(.debug_abbrev)
- .debug_abbrev  0x00000000      0x1fa autobot.o
- .debug_abbrev  0x000001fa      0x13d lcd.o
- .debug_abbrev  0x00000337       0xc5 adc.o
- .debug_abbrev  0x000003fc       0xd8 motor.o
- .debug_abbrev  0x000004d4       0xba posencoder.o
- .debug_abbrev  0x0000058e      0x10a uart.o
- .debug_abbrev  0x00000698      0x168 particlefilter.o
+ .debug_abbrev  0x00000000      0x1ed autobot.o
+ .debug_abbrev  0x000001ed      0x13d lcd.o
+ .debug_abbrev  0x0000032a       0xc5 adc.o
+ .debug_abbrev  0x000003ef       0xd8 motor.o
+ .debug_abbrev  0x000004c7       0xba posencoder.o
+ .debug_abbrev  0x00000581      0x10a uart.o
+ .debug_abbrev  0x0000068b      0x168 particlefilter.o
 
 .debug_line     0x00000000     0x132b
  *(.debug_line)
